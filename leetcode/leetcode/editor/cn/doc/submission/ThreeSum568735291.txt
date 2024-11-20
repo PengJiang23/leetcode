@@ -1,0 +1,35 @@
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<>();
+		// 遍历0，n-2之间每个数，然后转为两数之和
+        for (int i = 0; i < nums.length - 2; i++) {
+            int x = nums[i];
+            if (i > 0 && x == nums[i - 1])
+                continue;
+			
+            if(x + nums[i+1] + nums[i+2] > 0) break;
+            if(x + nums[nums.length - 1] + nums[nums.length -2] < 0) continue;
+            
+            int l = i + 1;
+            int r = nums.length - 1;
+            while (l < r) {
+                int s = x + nums[l] + nums[r];
+
+                if (s > 0) {
+                    r--;
+                } else if (s < 0) {
+                    l++;
+                } else {
+                    ans.add(List.of(x, nums[l], nums[r]));
+                    for (l++; l < r && nums[l] == nums[l - 1]; l++);
+                    for (r--; l < r && nums[r] == nums[r + 1]; r--);
+                }
+            }
+
+        }
+        return ans;
+    }
+}
+//runtime:26 ms
+//memory:50.3 MB
