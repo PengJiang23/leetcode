@@ -1,0 +1,23 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+		
+        char[] s1 = s.toCharArray();
+        int n = s1.length;
+        int ans = 0;
+        int l = 0;
+        boolean[] has = new boolean[128];
+        
+        for(int r =0; r<n; r++){
+            char c = s1[r];
+            while(has[c]){
+                has[s1[l++]] = false;
+            }
+            has[c] = true;
+            ans = Math.max(ans, r - l + 1);
+            
+        }
+        return ans;
+    }
+}
+//runtime:1 ms
+//memory:42.1 MB
