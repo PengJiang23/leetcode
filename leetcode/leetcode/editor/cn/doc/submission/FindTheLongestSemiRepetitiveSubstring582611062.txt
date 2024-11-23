@@ -1,0 +1,44 @@
+      class Solution {
+          public int longestSemiRepetitiveSubstring(String s) {
+
+              if(s.length() <= 1) return s.length();
+
+              int ans = Integer.MIN_VALUE;
+              int l = 0;
+              int curr = 0;
+
+              for (int i = 1; i < s.length(); i++) {
+
+                  char c1 = s.charAt(i-1);
+                  char c = s.charAt(i);
+
+                  if(c1 == c){
+                      curr +=1;
+                  }
+
+                  while(curr >= 2){
+
+                      if(l +1 < s.length() && s.charAt(l) != s.charAt(l+1)){
+                          curr -= 1;
+                      }
+                      if(l < s.length() - 1)
+                          l++;
+
+                  }
+
+                  ans = Math.max(ans,i - l +1);
+
+              }
+              return ans;
+          }
+      }
+
+//runtime:N/A
+//memory:N/A
+//total_testcases:12264
+//total_correct:2
+//input_formatted:"1111111"
+//expected_output:2
+//code_output:
+//runtime_error:
+//last_testcase:"1111111"
